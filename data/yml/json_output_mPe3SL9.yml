@@ -1,0 +1,17 @@
+---
+- name: Precheck VRF Status.
+  hosts: localhost
+  gather_facts: no
+  connection: local
+
+  tasks:
+  - name: Change Hostname
+    shell: cat test.txt
+    register: test
+
+
+  - copy:
+        content: "{{ test | to_nice_json }}"
+        dest: /tmp/{{ inventory_hostname }}.json
+    register: output
+  - debug: var=output
