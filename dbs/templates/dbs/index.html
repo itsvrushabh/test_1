@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> MoPA Test</title>
+	<script>
+
+$(document).ready(function(){
+
+
+    $("#execute_login").submit(function(event){
+        $.ajax({
+            url: "{% url 'dbs:data' %}",
+            data: {
+                'options': 'data',
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            type: 'POST',
+            success: function (data) {
+                console.log('data');
+                $("#check_data").html(data["data"]);
+         
+            },
+            error: function (data) {
+                console.log('error ');
+                
+                $("#login_label").html(data["result"]);
+            }
+        });
+    });
+  
+});
+    
+</script>
+</head>
+<body>
+	<div style="margin-left:100px">
+    
+   
+    
+	<label class='result_label' id="check_data" ></label>
+    
+	
+   
+
+</div>
+
+</body>
+</html>
